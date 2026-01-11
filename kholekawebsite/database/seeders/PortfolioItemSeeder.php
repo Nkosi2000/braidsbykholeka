@@ -2,72 +2,76 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\PortfolioItem;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class PortfolioItemSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        DB::table('portfolio_items')->insert([
+        $items = [
             [
-                'title' => 'Knotless Braids',
-                'description' => 'Beautiful, seamless knotless braids for a natural look.',
-                'image_path' => 'portfolio/KnotlessBraids.jpg',
+                'title' => 'Medium Knotless Braids',
+                'slug' => 'medium-knotless-braids',
+                'description' => 'Natural-looking medium knotless braids with soft curls at the ends',
                 'category' => 'knotless',
+                'style_type' => 'Medium Size',
+                'hair_type' => 'Premium Synthetic',
+                'duration' => '6 hours',
                 'is_featured' => true,
                 'sort_order' => 1,
-                'created_at' => now(),
+                'main_image' => 'images/watermarks/salon/portfolio/knotless1.jpg',
+                'gallery_images' => json_encode([
+                    'images/watermarks/salon/portfolio/knotless1.jpg',
+                    'images/watermarks/salon/portfolio/knotless2.jpg',
+                ]),
+                'tags' => json_encode(['knotless', 'medium', 'natural', 'curls']),
+                'client_feedback' => 'These are the most comfortable braids I\'ve ever had! No tension headaches and they look so natural.',
+                'client_initials' => 'A.M.'
             ],
             [
-                'title' => 'Box Braids with Beads',
-                'description' => 'Classic box braids with decorative beads.',
-                'image_path' => 'portfolio/BoxBraidswithBeads.jpg',
-                'category' => 'box-braids',
+                'title' => 'Jumbo Box Braids',
+                'slug' => 'jumbo-box-braids',
+                'description' => 'Bold jumbo box braids with natural black hair',
+                'category' => 'box',
+                'style_type' => 'Jumbo Size',
+                'hair_type' => 'Kanekalon',
+                'duration' => '5 hours',
                 'is_featured' => true,
                 'sort_order' => 2,
-                'created_at' => now(),
+                'main_image' => 'images/watermarks/salon/portfolio/box1.jpg',
+                'gallery_images' => json_encode([
+                    'images/watermarks/salon/portfolio/box1.jpg',
+                ]),
+                'tags' => json_encode(['box', 'jumbo', 'bold', 'black']),
+                'client_feedback' => 'I love how lightweight these jumbo braids feel! Perfect for making a statement.',
+                'client_initials' => 'J.L.'
             ],
             [
-                'title' => 'Creative Cornrows',
-                'description' => 'Intricate cornrow patterns with creative designs.',
-                'image_path' => 'portfolio/CornrowsBraids.jpg',
-                'category' => 'cornrows',
+                'title' => 'Fulani Braids',
+                'slug' => 'fulani-braids',
+                'description' => 'Traditional Fulani braids with beads and cowrie shells',
+                'category' => 'protective',
+                'style_type' => 'Fulani Style',
+                'hair_type' => 'Human Hair Blend',
+                'duration' => '7 hours',
                 'is_featured' => true,
                 'sort_order' => 3,
-                'created_at' => now(),
+                'main_image' => 'images/watermarks/salon/portfolio/protective1.jpg',
+                'gallery_images' => json_encode([
+                    'images/watermarks/salon/portfolio/protective1.jpg',
+                ]),
+                'tags' => json_encode(['fulani', 'traditional', 'beads', 'cowrie']),
+                'client_feedback' => 'Absolutely stunning! The attention to detail with the beads is incredible.',
+                'client_initials' => 'C.R.'
             ],
-            [
-                'title' => 'Goddess Braids',
-                'description' => 'Elegant goddess braids for a regal look.',
-                'image_path' => 'portfolio/GoddessBraids.jpg',
-                'category' => 'goddess',
-                'is_featured' => false,
-                'sort_order' => 4,
-                'created_at' => now(),
-            ],
-            [
-                'title' => 'Lemonade Braids',
-                'description' => 'Side-swept lemonade braids inspired by Beyoncé.',
-                'image_path' => 'portfolio/LemonadeBraid.jpg',
-                'category' => 'lemonade',
-                'is_featured' => false,
-                'sort_order' => 5,
-                'created_at' => now(),
-            ],
-            [
-                'title' => 'Butterfly Braids',
-                'description' => 'Delicate butterfly braids with unique styling.',
-                'image_path' => 'portfolio/ButterflyBraids.jpg',
-                'category' => 'creative',
-                'is_featured' => false,
-                'sort_order' => 6,
-                'created_at' => now(),
-            ],
-        ]);
+        ];
+
+        foreach ($items as $item) {
+            PortfolioItem::updateOrCreate(
+                ['slug' => $item['slug']],
+                $item
+            );
+        }
     }
 }

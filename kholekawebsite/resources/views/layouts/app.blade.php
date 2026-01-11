@@ -2,649 +2,1470 @@
 <html lang="en" class="h-100">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="description" content="Exclusive luxury braiding salon by Kholeka. Masterful artistry in knotless braids, box braids, and bespoke protective styles for the discerning client.">
-    
-    <title>@yield('title', 'Braids by Kholeka | Exclusive Hair Artistry')</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Braids by Kholeka | Luxury Hair Artistry')</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/watermarks/salon/favicon.ico') }}">
     
-    <!-- Fonts - Only loading essential weights -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap 5 CSS -->
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Essential Icons Only -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
     <style>
-        /* === LUXURY CSS VARIABLES === */
+        /* ===== CSS VARIABLES ===== */
         :root {
-            --velvet: #2d1b2e;      /* Deep Dark Purple */
-            --amethyst: #8a4d76;    /* Rich Purple Accent */
-            --obsidian: #121212;    /* Deep Black */
-            --porcelain: #ffffff;   /* Pure White */
-            --silk: #f8f9fa;        /* Light Grey */
-            --slate: #6c757d;       /* Medium Grey */
-            --charcoal: #343a40;    /* Dark Grey */
-            --glimmer: rgba(255, 255, 255, 0.1);
+            /* Premium Color Palette */
+            --primary-pink: #FF2D8F;
+            --secondary-pink: #FF5DA8;
+            --light-pink: #FFF0F7;
+            --soft-pink: #FFE8F5;
+            --deep-pink: #E60073;
+            --black: #000000;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #333333;
+            --light-gray: #F8F8F8;
+            --white: #FFFFFF;
+            --cream: #FFFCF9;
+            
+            /* Gradients */
+            --gradient-pink: linear-gradient(135deg, var(--primary-pink) 0%, var(--deep-pink) 100%);
+            --gradient-light: linear-gradient(135deg, var(--soft-pink) 0%, var(--cream) 100%);
+            --gradient-dark: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 100%);
+            --gradient-gold-pink: linear-gradient(135deg, #FFD700 0%, var(--primary-pink) 100%);
+            
+            /* Shadows */
+            --shadow-soft: 0 4px 20px rgba(255, 45, 143, 0.08);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-hard: 0 15px 50px rgba(0, 0, 0, 0.2);
+            --shadow-pink: 0 10px 30px rgba(255, 45, 143, 0.2);
+            --shadow-pink-heavy: 0 20px 60px rgba(255, 45, 143, 0.3);
+            
+            /* Spacing System */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 3rem;
+            --space-xl: 4rem;
+            --space-xxl: 6rem;
+            
+            /* Transitions */
+            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-round: 50px;
         }
         
-        /* === BASE ELEGANCE === */
+        /* ===== CSS RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
-            font-weight: 300;
-            color: var(--charcoal);
-            background: var(--porcelain);
+            color: var(--dark-gray);
+            background: var(--white);
             line-height: 1.7;
-            letter-spacing: 0.2px;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(138, 77, 118, 0.03) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(45, 27, 46, 0.02) 0%, transparent 40%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, var(--white) 0%, var(--soft-pink) 100%);
         }
         
-        h1, h2, h3, h4, .elegant-font {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--velvet);
-            font-weight: 500;
+        h1, h2, h3, .display-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--black);
             line-height: 1.2;
+            letter-spacing: -0.02em;
         }
         
-        /* === RESPONSIVE TYPOGRAPHY WITH CLAMP === */
-        .display-elegant-1 { font-size: clamp(2.8rem, 6vw, 4.5rem); }
-        .display-elegant-2 { font-size: clamp(2.2rem, 4.5vw, 3.5rem); }
-        .display-elegant-3 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
-        .lead-responsive { font-size: clamp(1rem, 2vw, 1.2rem); }
-        
-        /* === GLAMOROUS NAVIGATION === */
-        .nav-glamorous {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(45, 27, 46, 0.05);
-            padding: 1.2rem 0; /* Reduced from 1.5rem */
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        @media (max-width: 992px) {
-            .nav-glamorous {
-                padding: 0.8rem 0; /* Reduced from 1rem */
-                background: var(--porcelain);
-            }
-        }
-        
-        .nav-glamorous.scrolled {
-            padding: 0.8rem 0; /* Matches mobile when scrolled */
-            box-shadow: 0 5px 30px rgba(45, 27, 46, 0.08);
-        }
-        
-        .brand-elegant {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.8rem, 3vw, 2.2rem); /* Slightly smaller */
+        h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            color: var(--velvet);
+            color: var(--dark-gray);
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-smooth);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* ===== LAYOUT UTILITIES ===== */
+        .container-fluid {
+            padding-left: var(--space-md);
+            padding-right: var(--space-md);
+        }
+        
+        .container {
+            max-width: 1280px;
+            padding-left: var(--space-md);
+            padding-right: var(--space-md);
+        }
+        
+        section {
+            padding: var(--space-xxl) 0;
             position: relative;
+        }
+        
+        .section-sm {
+            padding: var(--space-xl) 0;
+        }
+        
+        .section-lg {
+            padding: 8rem 0;
+        }
+        
+        /* ===== TYPOGRAPHY ===== */
+        .display-1 {
+            font-size: clamp(3.5rem, 5vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+        
+        .display-2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 700;
+        }
+        
+        .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--medium-gray);
+        }
+        
+        .text-gradient {
+            background: var(--gradient-pink);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             display: inline-block;
-            letter-spacing: 1px;
         }
         
-        .brand-elegant::after {
-            content: '✦';
-            position: absolute;
-            right: -1.2rem; /* Adjusted */
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--amethyst);
+        /* ===== BUTTONS ===== */
+        .btn {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
             font-size: 1rem;
-        }
-        
-        .nav-link-glamorous {
-            color: var(--charcoal);
-            font-weight: 400;
-            padding: 0.6rem 1.1rem !important; /* Reduced padding */
-            margin: 0 0.1rem;
-            position: relative;
-            transition: color 0.3s ease;
-            font-size: 0.95rem;
-        }
-        
-        .nav-link-glamorous::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--amethyst), var(--velvet));
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link-glamorous:hover,
-        .nav-link-glamorous.active {
-            color: var(--velvet);
-        }
-        
-        .nav-link-glamorous:hover::before,
-        .nav-link-glamorous.active::before {
-            width: 70%;
-        }
-        
-        /* === LUXURY BUTTON === */
-        .btn-luxury {
-            background: linear-gradient(135deg, var(--amethyst), var(--velvet));
+            letter-spacing: 0.5px;
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius-round);
             border: none;
-            color: var(--porcelain);
-            padding: 0.85rem 2rem; /* Slightly reduced */
-            font-weight: 400;
-            letter-spacing: 0.8px;
-            border-radius: 0;
+            transition: var(--transition-bounce);
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
             text-transform: uppercase;
-            font-size: 0.85rem; /* Smaller */
+            font-size: 0.9rem;
         }
         
-        .btn-luxury::before {
+        .btn::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, var(--glimmer), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition-smooth);
+            z-index: -1;
         }
         
-        .btn-luxury:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(138, 77, 118, 0.25);
-            color: var(--porcelain);
-        }
-        
-        .btn-luxury:hover::before {
+        .btn:hover::before {
             left: 100%;
         }
         
-        /* === FIXED NAVBAR SPACING FIX === */
-        /* Add this to prevent content from hiding under fixed navbar */
-        .fixed-navbar-spacer {
-            height: 80px; /* Adjusted navbar height */
+        .btn-primary {
+            background: var(--gradient-pink);
+            color: var(--white);
+            box-shadow: var(--shadow-pink);
         }
         
-        @media (max-width: 992px) {
-            .fixed-navbar-spacer {
-                height: 65px; /* Adjusted for mobile */
-            }
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-pink-heavy);
+            color: var(--white);
         }
         
-        /* === RESPONSIVE FOOTER === */
-        .footer-glamorous {
-            background: linear-gradient(135deg, var(--velvet) 0%, var(--obsidian) 100%);
-            color: var(--silk);
-            padding: 4rem 0 2rem;
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-pink);
+            border: 2px solid var(--primary-pink);
             position: relative;
-        }
-        
-        .footer-glamorous::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--amethyst), transparent);
-        }
-        
-        .footer-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.8rem, 3vw, 2.2rem);
-            color: var(--porcelain);
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-        
-        .footer-column h5 {
-            color: var(--porcelain);
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.8rem;
-        }
-        
-        .footer-column h5::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 30px;
-            height: 1px;
-            background: var(--amethyst);
-        }
-        
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            display: block;
-            padding: 0.4rem 0;
-            transition: all 0.3s ease;
-            position: relative;
-            padding-left: 1.2rem;
-        }
-        
-        .footer-links a::before {
-            content: '›';
-            position: absolute;
-            left: 0;
-            color: var(--amethyst);
-            transition: transform 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--porcelain);
-            padding-left: 1.5rem;
-        }
-        
-        .footer-links a:hover::before {
-            transform: translateX(3px);
-        }
-        
-        .footer-contact {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .footer-contact i {
-            color: var(--amethyst);
-            margin-right: 1rem;
-            font-size: 1.1rem;
-            margin-top: 0.2rem;
-            flex-shrink: 0;
-        }
-        
-        /* === RESPONSIVE SOCIAL ICONS === */
-        .social-glamorous {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-        
-        .social-glamorous a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            color: var(--porcelain);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .social-glamorous a:hover {
-            background: var(--amethyst);
-            transform: translateY(-3px);
-            border-color: transparent;
-        }
-        
-        /* === RESPONSIVE SPACING SYSTEM === */
-        .section-elegant {
-            padding: clamp(4rem, 8vw, 6rem) 0;
-        }
-        
-        /* Add padding-top to first section to account for fixed navbar */
-        .first-content-section {
-            padding-top: calc(clamp(4rem, 8vw, 6rem) + 80px) !important;
-        }
-        
-        @media (max-width: 992px) {
-            .first-content-section {
-                padding-top: calc(clamp(4rem, 8vw, 6rem) + 65px) !important;
-            }
-        }
-        
-        .py-elegant {
-            padding-top: clamp(2rem, 4vw, 3rem);
-            padding-bottom: clamp(2rem, 4vw, 3rem);
-        }
-        
-        .my-elegant {
-            margin-top: clamp(2rem, 4vw, 3rem);
-            margin-bottom: clamp(2rem, 4vw, 3rem);
-        }
-        
-        /* === MOBILE OPTIMIZATION === */
-        @media (max-width: 768px) {
-            .nav-glamorous .navbar-collapse {
-                background: var(--porcelain);
-                padding: 1.2rem; /* Reduced */
-                border-radius: 12px;
-                margin-top: 0.8rem; /* Reduced */
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-            
-            .nav-link-glamorous {
-                padding: 0.6rem 0 !important; /* Reduced */
-                margin: 0.2rem 0; /* Reduced */
-                border-bottom: 1px solid rgba(45, 27, 46, 0.05);
-            }
-            
-            .nav-link-glamorous::before {
-                display: none;
-            }
-            
-            .btn-luxury {
-                width: 100%;
-                max-width: 100%;
-                margin-top: 0.8rem; /* Reduced */
-                padding: 0.75rem 1.5rem; /* Smaller on mobile */
-            }
-            
-            .footer-column {
-                margin-bottom: 2.5rem;
-                text-align: center;
-            }
-            
-            .footer-column h5::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            
-            .footer-links a {
-                padding-left: 0;
-                text-align: center;
-            }
-            
-            .footer-links a::before {
-                display: none;
-            }
-            
-            .social-glamorous {
-                justify-content: center;
-            }
-            
-            .mobile-text-center {
-                text-align: center;
-            }
-        }
-        
-        @media (min-width: 769px) and (max-width: 1199px) {
-            .nav-link-glamorous {
-                padding: 0.6rem 0.8rem !important; /* Reduced */
-                font-size: 0.9rem;
-            }
-            
-            .btn-luxury {
-                padding: 0.8rem 1.5rem; /* Reduced */
-            }
-        }
-        
-        /* === LUXURY UTILITY CLASSES === */
-        .text-velvet { color: var(--velvet) !important; }
-        .text-amethyst { color: var(--amethyst) !important; }
-        .bg-velvet { background-color: var(--velvet) !important; }
-        .bg-silk { background-color: var(--silk) !important; }
-        
-        .letter-spacing-1 { letter-spacing: 1px; }
-        .letter-spacing-2 { letter-spacing: 2px; }
-        
-        .opacity-75 { opacity: 0.75; }
-        .opacity-60 { opacity: 0.6; }
-        
-        /* === GLAMOROUS CARD === */
-        .card-glamorous {
-            background: var(--porcelain);
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(45, 27, 46, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
-            position: relative;
         }
         
-        .card-glamorous::before {
+        .btn-outline::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--amethyst), var(--velvet));
+            height: 100%;
+            background: var(--gradient-pink);
+            transform: translateX(-100%);
+            transition: var(--transition-smooth);
+            z-index: -1;
+        }
+        
+        .btn-outline:hover {
+            color: var(--white);
+            border-color: transparent;
+        }
+        
+        .btn-outline:hover::after {
+            transform: translateX(0);
+        }
+        
+        /* ===== NAVIGATION - PERFECTLY ALIGNED ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(15px);
+            padding: 1.25rem 0;
+            z-index: 9999;
+            transition: var(--transition-smooth);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar.scrolled {
+            padding: 0.875rem 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-medium);
+            border-bottom: 1px solid rgba(255, 45, 143, 0.1);
+        }
+        
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            margin-right: var(--space-lg);
+        }
+        
+        .nav-logo {
+            height: 52px;
+            width: auto;
+            transition: var(--transition-bounce);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+        
+        .nav-logo:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+        
+        .navbar-nav {
+            gap: 0.25rem;
+            align-items: center;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--dark-gray) !important;
+            padding: 0.75rem 1.5rem !important;
+            border-radius: var(--radius-round);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-pink);
+            opacity: 0;
+            transition: var(--transition-smooth);
+            z-index: -1;
+            border-radius: var(--radius-round);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--primary-pink);
+            border-radius: 50%;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--white) !important;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            opacity: 1;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            opacity: 1;
+            bottom: 4px;
+        }
+        
+        /* Mobile Navigation Toggle */
+        .navbar-toggler {
+            width: 48px;
+            height: 48px;
+            padding: 0.75rem;
+            border: 1px solid rgba(255, 45, 143, 0.2);
+            border-radius: 12px;
+            background: var(--white);
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(255, 45, 143, 0.1);
+        }
+        
+        .navbar-toggler span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--primary-pink);
+            margin: 4px auto;
+            transition: var(--transition-smooth);
+            transform-origin: center;
+        }
+        
+        .navbar-toggler[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        
+        .navbar-toggler[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
             transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
         }
         
-        .card-glamorous:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(45, 27, 46, 0.15);
+        .navbar-toggler[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
         }
         
-        .card-glamorous:hover::before {
-            transform: scaleX(1);
-        }
-        
-        /* === MAIN CONTENT SPACING === */
+        /* ===== MAIN CONTENT ===== */
         main {
-            min-height: calc(100vh - 380px); /* Adjusted for smaller footer */
+            flex: 1;
+            padding-top: 100px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        /* ===== FOOTER - ULTRA PREMIUM ===== */
+        .footer {
+            background: var(--gradient-dark);
+            color: var(--white);
+            padding: var(--space-xxl) 0 var(--space-lg);
+            margin-top: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-pink);
+            z-index: 1;
+        }
+        
+        .footer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 45, 143, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 45, 143, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        /* FIXED FOOTER LOGO - ORIGINAL STYLING */
+        .footer-brand {
+            display: block;
+            margin-bottom: var(--space-md);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-logo {
+            height: 60px;
+            width: auto;
+            filter: 
+                drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))
+                brightness(1.1)
+                contrast(1.1);
+            transition: var(--transition-bounce);
+        }
+        
+        /* Original logo effect - no inversion, just enhanced for dark background */
+        .footer-logo:hover {
+            transform: scale(1.08) rotate(2deg);
+            filter: 
+                drop-shadow(0 4px 8px rgba(255, 45, 143, 0.3))
+                brightness(1.2)
+                contrast(1.2);
+        }
+        
+        .footer-heading {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1.5px;
+            color: var(--white);
+            margin-bottom: var(--space-md);
+            padding-bottom: 0.875rem;
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 45px;
+            height: 3px;
+            background: var(--gradient-pink);
+            border-radius: 2px;
+            transition: var(--transition-smooth);
+        }
+        
+        .footer-heading:hover::after {
+            width: 100%;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.875rem;
+            transform: translateX(0);
+            transition: var(--transition-smooth);
+        }
+        
+        .footer-links li:hover {
+            transform: translateX(8px);
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: var(--transition-smooth);
+        }
+        
+        .footer-links a::before {
+            content: '→';
+            color: var(--primary-pink);
+            font-weight: 700;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: var(--transition-smooth);
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+        
+        .footer-links a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .contact-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            padding: 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--gradient-pink);
+            transform: scaleY(0);
+            transition: var(--transition-smooth);
+        }
+        
+        .contact-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-4px);
+            border-color: rgba(255, 45, 143, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-card:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .contact-icon {
+            color: var(--primary-pink);
+            font-size: 1.5rem;
+            min-width: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-details {
+            flex: 1;
+        }
+        
+        .contact-details strong {
+            display: block;
+            color: var(--white);
+            margin-bottom: 0.375rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        
+        .contact-details span,
+        .contact-details a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .contact-details a:hover {
+            color: var(--primary-pink);
+        }
+        
+        .social-grid {
+            display: flex;
+            gap: 0.875rem;
+            margin-top: var(--space-md);
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: var(--white);
+            transition: var(--transition-bounce);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-pink);
+            transform: scale(0);
+            transition: var(--transition-smooth);
+            border-radius: inherit;
+            z-index: -1;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-4px) rotate(5deg);
+            border-color: transparent;
+            color: var(--white);
+        }
+        
+        .social-link:hover::before {
+            transform: scale(1);
+        }
+        
+        .hours-table {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hours-row:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(4px);
+            border-color: rgba(255, 45, 143, 0.2);
+        }
+        
+        .hours-day {
+            color: var(--white);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .hours-time {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .hours-time.highlight {
+            color: var(--primary-pink);
+            font-weight: 600;
+            position: relative;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 45, 143, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 45, 143, 0.2);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: var(--space-lg);
+            margin-top: var(--space-xxl);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .copyright a {
+            color: var(--primary-pink);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .copyright a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+        
+        /* ===== SCROLL TO TOP BUTTON ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.9);
+            transition: var(--transition-bounce);
+            z-index: 999;
+            box-shadow: var(--shadow-pink);
+            border: none;
+            overflow: hidden;
+        }
+        
+        .scroll-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: var(--transition-smooth);
+        }
+        
+        .scroll-top:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: var(--shadow-pink-heavy);
+        }
+        
+        /* ===== DECORATIVE ELEMENTS ===== */
+        .accent-line {
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-pink);
+            margin: var(--space-md) 0;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .accent-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 100%;
+            background: var(--white);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(500%); }
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient-pink);
+            opacity: 0.1;
+            filter: blur(40px);
+            z-index: -1;
+        }
+        
+        /* ===== RESPONSIVE DESIGN - PERFECT FOR ALL DEVICES ===== */
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1400px;
+            }
+            
+            .navbar-nav {
+                gap: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 1199.98px) {
+            .container {
+                max-width: 100%;
+                padding-left: var(--space-lg);
+                padding-right: var(--space-lg);
+            }
+            
+            section {
+                padding: var(--space-xl) 0;
+            }
+            
+            .nav-link {
+                padding: 0.625rem 1.25rem !important;
+            }
+        }
+        
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                padding: var(--space-md);
+                margin-top: var(--space-sm);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-hard);
+                border: 1px solid rgba(255, 45, 143, 0.1);
+            }
+            
+            .navbar-nav {
+                gap: 0.5rem;
+                padding: var(--space-sm) 0;
+            }
+            
+            .nav-item {
+                width: 100%;
+            }
+            
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 1rem 1.5rem !important;
+                border-radius: var(--radius-md);
+                justify-content: center;
+            }
+            
+            .nav-link::after {
+                display: none;
+            }
+            
+            .btn-book {
+                width: 100%;
+                margin-top: var(--space-sm);
+                justify-content: center;
+            }
+            
+            .footer {
+                padding: var(--space-xl) 0 var(--space-lg);
+            }
+            
+            .footer .col-lg-3,
+            .footer .col-md-6 {
+                margin-bottom: var(--space-xl);
+            }
+            
+            .footer-heading {
+                font-size: 1rem;
+            }
+            
+            .footer-logo {
+                height: 55px;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            :root {
+                --space-xl: 3rem;
+                --space-xxl: 4rem;
+            }
+            
+            main {
+                padding-top: 90px;
+            }
+            
+            .navbar {
+                padding: 1rem 0;
+            }
+            
+            .nav-logo {
+                height: 48px;
+            }
+            
+            .display-1 {
+                font-size: clamp(2.75rem, 4vw, 4rem);
+            }
+            
+            .display-2 {
+                font-size: clamp(2.25rem, 3.5vw, 3rem);
+            }
+            
+            .btn {
+                padding: 0.875rem 2rem;
+                font-size: 0.875rem;
+            }
+            
+            .footer {
+                padding: var(--space-lg) 0 var(--space-md);
+            }
+            
+            .footer-logo {
+                height: 50px;
+            }
+            
+            .contact-card {
+                padding: 1rem;
+            }
+            
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 52px;
+                height: 52px;
+            }
+            
+            .copyright {
+                padding-top: var(--space-md);
+                margin-top: var(--space-xl);
+            }
+        }
+        
+        @media (max-width: 575.98px) {
+            .container {
+                padding-left: var(--space-sm);
+                padding-right: var(--space-sm);
+            }
+            
+            section {
+                padding: var(--space-lg) 0;
+            }
+            
+            h1 {
+                font-size: 2.25rem;
+            }
+            
+            h2 {
+                font-size: 1.875rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 320px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .footer .col-12 {
+                margin-bottom: var(--space-lg);
+            }
+            
+            .social-grid {
+                justify-content: center;
+            }
+            
+            .hours-row {
+                padding: 0.875rem;
+            }
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* ===== CUSTOM SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--soft-pink);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-pink);
+            border-radius: var(--radius-round);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--deep-pink);
         }
     </style>
-    
-    @stack('styles')
 </head>
 <body>
-    <!-- === GLAMOROUS NAVIGATION === -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-glamorous" id="glamorousNav">
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top">
+        <i class="bi bi-chevron-up fs-5"></i>
+    </button>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand brand-elegant" href="{{ route('home') }}">
-                Braids by Kholeka
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ asset('images/watermarks/salon/logo2.png') }}" 
+                     alt="Braids by Kholeka - Luxury Hair Artistry" 
+                     class="nav-logo"
+                     onerror="this.onerror=null; this.src='https://via.placeholder.com/200x50/FF2D8F/FFFFFF?text=Braids+by+Kholeka'">
             </a>
             
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#glamorousNavContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
             
-            <div class="collapse navbar-collapse" id="glamorousNavContent">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-glamorous {{ request()->is('/') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" 
+                           href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-glamorous {{ request()->is('services') ? 'active' : '' }}" href="{{ route('services.index') }}">Services</a>
+                        <a class="nav-link {{ request()->routeIs('services.*') ? 'active' : '' }}" 
+                           href="{{ route('services.index') }}">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-glamorous {{ request()->is('portfolio') ? 'active' : '' }}" href="{{ route('portfolio') }}">Portfolio</a>
+                        <a class="nav-link {{ request()->routeIs('portfolio.*') ? 'active' : '' }}" 
+                           href="{{ route('portfolio') }}">Portfolio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-glamorous {{ request()->is('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
+                        <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" 
+                           href="{{ route('about') }}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-glamorous {{ request()->is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a>
-                    </li>
-                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                        <a class="btn btn-luxury d-inline-flex align-items-center justify-content-center" href="{{ route('contact') }}">
-                            <i class="bi bi-calendar3 me-2"></i> Reserve
-                        </a>
+                        <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" 
+                           href="{{ route('contact') }}">Contact</a>
                     </li>
                 </ul>
+                
+                <div class="d-lg-none w-100 text-center mt-3">
+                    <a href="{{ route('contact') }}" class="btn btn-primary ms-lg-3 d-inline-block">
+                        <i class="bi bi-calendar-check me-2"></i>
+                        <span>Book Appointment</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Spacer for fixed navbar - THIS FIXES THE OVERLAY ISSUE -->
-    <div class="fixed-navbar-spacer"></div>
-
-    <!-- === MAIN CONTENT === -->
+    <!-- Main Content -->
     <main>
         @yield('content')
     </main>
 
-    <!-- === GLAMOROUS FOOTER === -->
-    <footer class="footer-glamorous">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <div class="row g-4">
-                <!-- Brand Column -->
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <a href="{{ route('home') }}" class="footer-title">Braids by Kholeka</a>
-                    <p class="opacity-75 mb-4">
-                        Where hair transforms into art. Exclusive braiding experiences with meticulous attention to detail and unparalleled craftsmanship.
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <a href="{{ route('home') }}" class="footer-brand">
+                        <img src="{{ asset('images/watermarks/salon/logo2.png') }}" 
+                             alt="Braids by Kholeka - Luxury Hair Artistry" 
+                             class="footer-logo"
+                             onerror="this.onerror=null; this.src='https://via.placeholder.com/200x50/FF2D8F/FFFFFF?text=Braids+by+Kholeka'">
+                    </a>
+                    <p class="mb-4" style="color: rgba(255, 255, 255, 0.85); font-size: 1rem; line-height: 1.7;">
+                        Where hair becomes art. Professional braiding services with meticulous attention to detail 
+                        and luxury experience. Each style is crafted with passion and precision.
                     </p>
-                    <div class="social-glamorous">
-                        <a href="#" aria-label="Instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="#" aria-label="Pinterest" title="Pinterest"><i class="bi bi-pinterest"></i></a>
-                        <a href="#" aria-label="Facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="#" aria-label="TikTok" title="TikTok"><i class="bi bi-tiktok"></i></a>
-                    </div>
-                </div>
-                
-                <!-- Quick Links -->
-                <div class="col-lg-2 col-md-4 col-6 footer-column">
-                    <h5>Explore</h5>
-                    <div class="footer-links">
-                        <a href="{{ route('home') }}">Home</a>
-                        <a href="{{ route('services.index') }}">Services</a>
-                        <a href="{{ route('portfolio') }}">Portfolio</a>
-                        <a href="{{ route('about') }}">My Story</a>
-                        <a href="{{ route('contact') }}">Consultation</a>
-                    </div>
-                </div>
-                
-                <!-- Contact Info -->
-                <div class="col-lg-3 col-md-4 col-6 footer-column">
-                    <h5>Contact</h5>
-                    <div class="footer-contact">
-                        <i class="bi bi-geo-alt"></i>
-                        <div>
-                            <strong class="d-block">Studio</strong>
-                            <span>123 Luxury Lane<br>Braid District</span>
-                        </div>
-                    </div>
-                    <div class="footer-contact">
-                        <i class="bi bi-telephone"></i>
-                        <div>
-                            <strong class="d-block">By Appointment</strong>
-                            <a href="tel:+1234567890" class="text-decoration-none">(123) 456-7890</a>
-                        </div>
-                    </div>
-                    <div class="footer-contact">
-                        <i class="bi bi-envelope"></i>
-                        <div>
-                            <strong class="d-block">Email</strong>
-                            <a href="mailto:reservations@braidsbykholeka.com" class="text-decoration-none">reservations@braidsbykholeka.com</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Hours -->
-                <div class="col-lg-3 col-md-4 footer-column mobile-text-center">
-                    <h5>Hours</h5>
-                    <div class="opacity-75">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Tue - Thu</span>
-                            <span>10:00 - 18:00</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Fri - Sat</span>
-                            <span>09:00 - 19:00</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Sunday</span>
-                            <span class="text-amethyst">By Appointment</span>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span>Monday</span>
-                            <span class="opacity-60">Closed</span>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <a href="{{ route('contact') }}" class="btn btn-outline-light btn-sm px-3 py-2">
-                            <i class="bi bi-star me-1"></i> VIP Inquiry
+                    <div class="social-grid">
+                        <a href="https://instagram.com" class="social-link" aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com" class="social-link" aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="https://pinterest.com" class="social-link" aria-label="Pinterest">
+                            <i class="bi bi-pinterest"></i>
+                        </a>
+                        <a href="https://tiktok.com" class="social-link" aria-label="TikTok">
+                            <i class="bi bi-tiktok"></i>
+                        </a>
+                        <a href="https://youtube.com" class="social-link" aria-label="YouTube">
+                            <i class="bi bi-youtube"></i>
                         </a>
                     </div>
                 </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="footer-heading">Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="{{ route('services.index') }}">Services</a></li>
+                        <li><a href="{{ route('portfolio') }}">Portfolio</a></li>
+                        <li><a href="{{ route('about') }}">About Me</a></li>
+                        <li><a href="{{ route('contact') }}">Contact</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-heading">Contact Info</h6>
+                    <div class="contact-grid">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                            <div class="contact-details">
+                                <strong>Studio Location</strong>
+                                <span>123 Luxury Lane<br>Suite 401, Beauty District<br>New York, NY 10001</span>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="bi bi-telephone-fill"></i>
+                            </div>
+                            <div class="contact-details">
+                                <strong>Phone Number</strong>
+                                <a href="tel:+1234567890">+1 (234) 567-890</a>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="bi bi-envelope-fill"></i>
+                            </div>
+                            <div class="contact-details">
+                                <strong>Email Address</strong>
+                                <a href="mailto:info@braidsbykholeka.com">artistry@braidsbykholeka.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-heading">Studio Hours</h6>
+                    <div class="hours-table">
+                        <div class="hours-row">
+                            <span class="hours-day">Monday</span>
+                            <span class="hours-time">By Appointment</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Tuesday - Thursday</span>
+                            <span class="hours-time">10:00 AM - 7:00 PM</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Friday - Saturday</span>
+                            <span class="hours-time">9:00 AM - 8:00 PM</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Sunday</span>
+                            <span class="hours-time highlight">VIP Appointments Only</span>
+                        </div>
+                    </div>
+                    <a href="{{ route('contact') }}" class="btn btn-primary mt-4 w-100">
+                        <i class="bi bi-calendar2-week me-2"></i>
+                        <span>Book VIP Session</span>
+                    </a>
+                </div>
             </div>
             
-            <!-- Divider -->
-            <hr class="my-elegant opacity-25">
-            
-            <!-- Copyright -->
-            <div class="row align-items-center py-elegant">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <p class="mb-0 opacity-75">&copy; <span id="currentYear">{{ date('Y') }}</span> Braids by Kholeka. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0 opacity-75">
-                        <i class="bi bi-heart-fill text-amethyst mx-1"></i> Crafted for extraordinary beauty
-                    </p>
+            <div class="copyright">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 text-center text-lg-start mb-3 mb-lg-0">
+                        <p class="mb-0">&copy; <span id="currentYear">{{ date('Y') }}</span> 
+                            <a href="{{ route('home') }}" class="text-gradient">Braids by Kholeka</a>. 
+                            All rights reserved. <a href="/privacy" style="color: rgba(255, 255, 255, 0.7);">Privacy Policy</a>
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-end">
+                        <p class="mb-0">
+                            <i class="bi bi-heart-fill text-pink me-1"></i>
+                            Handcrafted with passion & precision
+                            <i class="bi bi-stars text-pink ms-2"></i>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- === PERFORMANCE-OPTIMIZED SCRIPTS === -->
+    <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        // Luxury scroll effect for navbar
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('glamorousNav');
-            if (window.scrollY > 30) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+        // Initialize AOS with custom settings
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic',
+            delay: 150
         });
         
-        // Mobile navigation close on click
+        // Wait for DOM to load
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link-glamorous');
+            
+            // 1. Update copyright year dynamically
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // 2. Enhanced Navbar Scroll Effect
+            const navbar = document.querySelector('.navbar');
+            const scrollTopBtn = document.querySelector('.scroll-top');
+            
+            function updateScrollEffects() {
+                const scrollY = window.scrollY;
+                
+                if (scrollY > 80) {
+                    navbar.classList.add('scrolled');
+                    scrollTopBtn.classList.add('active');
+                } else {
+                    navbar.classList.remove('scrolled');
+                    scrollTopBtn.classList.remove('active');
+                }
+                
+                // Parallax effect for navbar
+                navbar.style.transform = `translateY(${scrollY * 0.02}px)`;
+            }
+            
+            window.addEventListener('scroll', updateScrollEffects);
+            updateScrollEffects();
+            
+            // 3. Smooth Scroll to Top with easing
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 4. Mobile Menu Enhancement
+            const navLinks = document.querySelectorAll('.nav-link');
             const navbarCollapse = document.querySelector('.navbar-collapse');
-            const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
             
             navLinks.forEach(link => {
-                link.addEventListener('click', function() {
+                link.addEventListener('click', () => {
                     if (window.innerWidth < 992) {
-                        bsCollapse.hide();
+                        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                        if (bsCollapse) {
+                            // Add closing animation
+                            navbarCollapse.style.opacity = '0';
+                            navbarCollapse.style.transform = 'translateY(-10px)';
+                            
+                            setTimeout(() => {
+                                bsCollapse.hide();
+                                navbarCollapse.style.opacity = '';
+                                navbarCollapse.style.transform = '';
+                            }, 300);
+                        }
                     }
                 });
             });
             
-            // Update copyright year
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            // 5. Premium Button Animations
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                // Mouse enter effect
+                button.addEventListener('mouseenter', (e) => {
+                    const rect = button.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    button.style.setProperty('--mouse-x', `${x}px`);
+                    button.style.setProperty('--mouse-y', `${y}px`);
+                    
+                    button.style.transform = 'translateY(-4px) scale(1.02)';
+                });
+                
+                // Mouse leave effect
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'translateY(0) scale(1)';
+                });
+                
+                // Click ripple effect
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.4);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        top: ${y}px;
+                        left: ${x}px;
+                        pointer-events: none;
+                        z-index: 1;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        if (ripple.parentNode === this) {
+                            this.removeChild(ripple);
+                        }
+                    }, 600);
+                });
+            });
             
-            // Luxury page load effect
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-                document.body.style.transition = 'opacity 0.5s ease';
-            }, 50);
+            // 6. Interactive Footer Elements
+            const footerCards = document.querySelectorAll('.contact-card, .hours-row');
+            footerCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-4px)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
             
-            // Set initial body opacity
-            document.body.style.opacity = '0';
+            // 7. Social Links Hover Effect
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    link.style.transform = 'translateY(-6px) rotate(5deg)';
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    link.style.transform = 'translateY(0) rotate(0)';
+                });
+            });
             
-            // Adjust navbar spacer height dynamically
-            function updateNavbarSpacer() {
-                const navbar = document.getElementById('glamorousNav');
-                const spacer = document.querySelector('.fixed-navbar-spacer');
-                if (navbar && spacer) {
-                    spacer.style.height = navbar.offsetHeight + 'px';
+            // 8. Logo Animation Enhancement
+            const logos = document.querySelectorAll('.nav-logo, .footer-logo');
+            logos.forEach(logo => {
+                logo.addEventListener('mouseenter', () => {
+                    logo.style.transform = 'scale(1.08) rotate(-2deg)';
+                });
+                
+                logo.addEventListener('mouseleave', () => {
+                    logo.style.transform = 'scale(1) rotate(0)';
+                });
+            });
+            
+            // 9. Form Input Focus Effects (if forms exist)
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                const inputs = form.querySelectorAll('input, textarea, select');
+                
+                inputs.forEach(input => {
+                    input.addEventListener('focus', () => {
+                        input.parentElement.style.transform = 'translateY(-3px)';
+                        input.parentElement.style.boxShadow = 'var(--shadow-pink)';
+                    });
+                    
+                    input.addEventListener('blur', () => {
+                        input.parentElement.style.transform = 'translateY(0)';
+                        input.parentElement.style.boxShadow = 'var(--shadow-soft)';
+                    });
+                });
+            });
+            
+            // 10. Lazy Load Images with fade-in effect
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                if (img.complete) {
+                    img.classList.add('fade-in');
+                } else {
+                    img.addEventListener('load', () => {
+                        img.classList.add('fade-in');
+                    });
+                }
+            });
+            
+            // 11. Add floating shapes for visual interest
+            function createFloatingShapes() {
+                const footer = document.querySelector('.footer');
+                for (let i = 0; i < 3; i++) {
+                    const shape = document.createElement('div');
+                    shape.className = 'floating-shape';
+                    shape.style.width = `${Math.random() * 200 + 100}px`;
+                    shape.style.height = shape.style.width;
+                    shape.style.left = `${Math.random() * 100}%`;
+                    shape.style.top = `${Math.random() * 100}%`;
+                    shape.style.animationDelay = `${Math.random() * 5}s`;
+                    shape.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                    footer.appendChild(shape);
                 }
             }
             
-            // Update on load and resize
-            updateNavbarSpacer();
-            window.addEventListener('resize', updateNavbarSpacer);
+            createFloatingShapes();
+            
+            // 12. Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    
+                    e.preventDefault();
+                    const targetElement = document.querySelector(href);
+                    
+                    if (targetElement) {
+                        const headerOffset = 100;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
         });
+        
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+        
     </script>
     
     @stack('scripts')

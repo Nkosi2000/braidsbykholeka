@@ -8,22 +8,40 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
     /**
-     * Display a listing of the services.
+     * Display all services
      */
     public function index()
     {
-        // Fetch all services, ordered by your preferred field
         $services = Service::orderBy('sort_order')->get();
-
-        // Pass the services data to the 'services.index' view
-        return view('services.index', compact('services'));
+        
+        // Group services by category if you have categories
+        $groupedServices = $services->groupBy('category');
+        
+        return view('pages.services', [
+            'title' => 'Services & Pricing | Luxury Braiding',
+            'services' => $services,
+            'groupedServices' => $groupedServices
+        ]);
     }
 
     /**
-     * Display a single service (optional, for future detail pages).
+     * Display a single service detail page
      */
-    public function show(Service $service)
+    public function show($slug)
     {
-        return view('services.show', compact('service'));
+        $service = Service::where('slug', $slug)->firstOrFail();
+        
+        // Get related services (same category, excluding current)
+        $relatedServices = Service::where('category', $service->category)
+                                 ->where('id', '!=', $service->id)
+                                 ->orderBy('sort_order')
+                                 ->take(3)
+                                 ->get();
+        
+        return view('pages.service-detail', [
+            'title' => $service->name . ' | Braids by Kholeka',
+            'service' => $service,
+            'relatedServices' => $relatedServices
+        ]);
     }
 }
