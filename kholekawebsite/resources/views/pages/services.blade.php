@@ -51,7 +51,7 @@
                         </div>
                         
                         <div class="mt-4">
-                            <a href="{{ route('services.show', $service->slug) }}" 
+                            <a href="#" 
                                class="btn btn-outline-amethyst w-100">
                                 View Details & Pricing
                             </a>

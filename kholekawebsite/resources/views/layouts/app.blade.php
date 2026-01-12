@@ -26,12 +26,12 @@
     <style>
         /* ===== CSS VARIABLES ===== */
         :root {
-            /* Premium Color Palette */
-            --primary-pink: #FF2D8F;
-            --secondary-pink: #FF5DA8;
-            --light-pink: #FFF0F7;
-            --soft-pink: #FFE8F5;
-            --deep-pink: #E60073;
+            /* Premium Color Palette - UPDATED TO #d45687 */
+            --primary-pink: #d45687;
+            --secondary-pink: #e875a3;
+            --light-pink: #fce8f1;
+            --soft-pink: #fad4e4;
+            --deep-pink: #b03c6e;
             --black: #000000;
             --dark-gray: #1A1A1A;
             --medium-gray: #333333;
@@ -39,18 +39,18 @@
             --white: #FFFFFF;
             --cream: #FFFCF9;
             
-            /* Gradients */
+            /* Gradients - UPDATED */
             --gradient-pink: linear-gradient(135deg, var(--primary-pink) 0%, var(--deep-pink) 100%);
             --gradient-light: linear-gradient(135deg, var(--soft-pink) 0%, var(--cream) 100%);
             --gradient-dark: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 100%);
             --gradient-gold-pink: linear-gradient(135deg, #FFD700 0%, var(--primary-pink) 100%);
             
-            /* Shadows */
-            --shadow-soft: 0 4px 20px rgba(255, 45, 143, 0.08);
+            /* Shadows - UPDATED */
+            --shadow-soft: 0 4px 20px rgba(212, 86, 135, 0.08);
             --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
             --shadow-hard: 0 15px 50px rgba(0, 0, 0, 0.2);
-            --shadow-pink: 0 10px 30px rgba(255, 45, 143, 0.2);
-            --shadow-pink-heavy: 0 20px 60px rgba(255, 45, 143, 0.3);
+            --shadow-pink: 0 10px 30px rgba(212, 86, 135, 0.2);
+            --shadow-pink-heavy: 0 20px 60px rgba(212, 86, 135, 0.3);
             
             /* Spacing System */
             --space-xs: 0.5rem;
@@ -70,6 +70,11 @@
             --radius-lg: 24px;
             --radius-xl: 32px;
             --radius-round: 50px;
+            
+            /* Fixed Navbar Height */
+            --navbar-height: 90px;
+            --navbar-height-scrolled: 70px;
+            --navbar-height-mobile: 80px;
         }
         
         /* ===== CSS RESET & BASE ===== */
@@ -81,7 +86,7 @@
         
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 100px;
+            scroll-padding-top: calc(var(--navbar-height) + 20px);
         }
         
         body {
@@ -94,6 +99,13 @@
             display: flex;
             flex-direction: column;
             background: linear-gradient(135deg, var(--white) 0%, var(--soft-pink) 100%);
+            padding-top: var(--navbar-height); /* Space for fixed navbar */
+        }
+        
+        @media (max-width: 991.98px) {
+            body {
+                padding-top: var(--navbar-height-mobile);
+            }
         }
         
         h1, h2, h3, .display-text {
@@ -147,30 +159,236 @@
             padding: 8rem 0;
         }
         
-        /* ===== TYPOGRAPHY ===== */
-        .display-1 {
-            font-size: clamp(3.5rem, 5vw, 5.5rem);
-            font-weight: 800;
-            line-height: 1.1;
+        /* ===== NAVIGATION - FIXED AT TOP ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: var(--space-md) 0;
+            z-index: 9999;
+            transition: var(--transition-smooth);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(212, 86, 135, 0.1);
+            height: var(--navbar-height);
+            display: flex;
+            align-items: center;
         }
         
-        .display-2 {
-            font-size: clamp(2.5rem, 4vw, 4rem);
-            font-weight: 700;
+        .navbar.scrolled {
+            padding: var(--space-sm) 0;
+            height: var(--navbar-height-scrolled);
+            background: rgba(255, 255, 255, 0.99);
+            backdrop-filter: blur(25px);
+            box-shadow: var(--shadow-medium);
+            border-bottom-color: rgba(212, 86, 135, 0.2);
         }
         
-        .lead {
-            font-size: 1.25rem;
-            font-weight: 400;
-            color: var(--medium-gray);
+        @media (max-width: 991.98px) {
+            .navbar {
+                height: var(--navbar-height-mobile);
+                padding: var(--space-sm) 0;
+            }
+            
+            .navbar.scrolled {
+                padding: var(--space-xs) 0;
+                height: calc(var(--navbar-height-mobile) - 10px);
+            }
         }
         
-        .text-gradient {
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            margin-right: var(--space-lg);
+            height: 100%;
+        }
+        
+        .nav-logo {
+            height: 50px;
+            width: auto;
+            transition: var(--transition-bounce);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+        
+        .nav-logo:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+        
+        @media (max-width: 991.98px) {
+            .nav-logo {
+                height: 45px;
+            }
+        }
+        
+        .navbar-nav {
+            gap: 0.25rem;
+            align-items: center;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--dark-gray) !important;
+            padding: 0.75rem 1.5rem !important;
+            border-radius: var(--radius-round);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: var(--gradient-pink);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
+            opacity: 0;
+            transition: var(--transition-smooth);
+            z-index: -1;
+            border-radius: var(--radius-round);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--primary-pink);
+            border-radius: 50%;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--white) !important;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            opacity: 1;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            opacity: 1;
+            bottom: 4px;
+        }
+        
+        /* Mobile Navigation Toggle */
+        .navbar-toggler {
+            width: 48px;
+            height: 48px;
+            padding: 0.75rem;
+            border: 1px solid rgba(212, 86, 135, 0.2);
+            border-radius: 12px;
+            background: var(--white);
+            position: relative;
+            transition: var(--transition-smooth);
+            margin-left: auto;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(212, 86, 135, 0.1);
+        }
+        
+        .navbar-toggler span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--primary-pink);
+            margin: 4px auto;
+            transition: var(--transition-smooth);
+            transform-origin: center;
+        }
+        
+        .navbar-toggler[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        
+        .navbar-toggler[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        
+        .navbar-toggler[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+        
+        /* Mobile Navigation Collapse */
+        .navbar-collapse {
+            transition: var(--transition-smooth);
+        }
+        
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(25px);
+                padding: var(--space-md);
+                margin-top: var(--space-xs);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-hard);
+                border: 1px solid rgba(212, 86, 135, 0.1);
+                max-height: calc(100vh - var(--navbar-height-mobile) - 20px);
+                overflow-y: auto;
+            }
+            
+            .navbar-nav {
+                gap: 0.5rem;
+                padding: var(--space-sm) 0;
+            }
+            
+            .nav-item {
+                width: 100%;
+            }
+            
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 1rem 1.5rem !important;
+                border-radius: var(--radius-md);
+                justify-content: center;
+                display: flex;
+                align-items: center;
+            }
+            
+            .nav-link::after {
+                display: none;
+            }
+            
+            /* Center the button below nav links on mobile */
+            .navbar-nav + .d-lg-none {
+                width: 100%;
+                margin-top: var(--space-sm);
+                padding-top: var(--space-sm);
+                border-top: 1px solid rgba(212, 86, 135, 0.1);
+            }
+            
+            .navbar-nav + .d-lg-none .btn-primary {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 2rem;
+            }
         }
         
         /* ===== BUTTONS ===== */
@@ -252,160 +470,14 @@
             transform: translateX(0);
         }
         
-        /* ===== NAVIGATION - PERFECTLY ALIGNED ===== */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(15px);
-            padding: 1.25rem 0;
-            z-index: 9999;
-            transition: var(--transition-smooth);
-            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .navbar.scrolled {
-            padding: 0.875rem 0;
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: var(--shadow-medium);
-            border-bottom: 1px solid rgba(255, 45, 143, 0.1);
-        }
-        
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            padding: 0;
-            margin-right: var(--space-lg);
-        }
-        
-        .nav-logo {
-            height: 52px;
-            width: auto;
-            transition: var(--transition-bounce);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-        }
-        
-        .nav-logo:hover {
-            transform: scale(1.05) rotate(-2deg);
-        }
-        
-        .navbar-nav {
-            gap: 0.25rem;
-            align-items: center;
-        }
-        
-        .nav-item {
-            position: relative;
-        }
-        
-        .nav-link {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: var(--dark-gray) !important;
-            padding: 0.75rem 1.5rem !important;
-            border-radius: var(--radius-round);
-            transition: var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-pink);
-            opacity: 0;
-            transition: var(--transition-smooth);
-            z-index: -1;
-            border-radius: var(--radius-round);
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 6px;
-            background: var(--primary-pink);
-            border-radius: 50%;
-            opacity: 0;
-            transition: var(--transition-smooth);
-        }
-        
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--white) !important;
-            transform: translateY(-2px);
-        }
-        
-        .nav-link:hover::before,
-        .nav-link.active::before {
-            opacity: 1;
-        }
-        
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            opacity: 1;
-            bottom: 4px;
-        }
-        
-        /* Mobile Navigation Toggle */
-        .navbar-toggler {
-            width: 48px;
-            height: 48px;
-            padding: 0.75rem;
-            border: 1px solid rgba(255, 45, 143, 0.2);
-            border-radius: 12px;
-            background: var(--white);
-            position: relative;
-            transition: var(--transition-smooth);
-        }
-        
-        .navbar-toggler:focus {
-            box-shadow: 0 0 0 3px rgba(255, 45, 143, 0.1);
-        }
-        
-        .navbar-toggler span {
-            display: block;
-            width: 22px;
-            height: 2px;
-            background: var(--primary-pink);
-            margin: 4px auto;
-            transition: var(--transition-smooth);
-            transform-origin: center;
-        }
-        
-        .navbar-toggler[aria-expanded="true"] span:nth-child(1) {
-            transform: translateY(6px) rotate(45deg);
-        }
-        
-        .navbar-toggler[aria-expanded="true"] span:nth-child(2) {
-            opacity: 0;
-            transform: scaleX(0);
-        }
-        
-        .navbar-toggler[aria-expanded="true"] span:nth-child(3) {
-            transform: translateY(-6px) rotate(-45deg);
-        }
-        
         /* ===== MAIN CONTENT ===== */
         main {
             flex: 1;
-            padding-top: 100px;
             width: 100%;
-            overflow: hidden;
+            margin-top: 0; /* Removed the padding-top since body has it */
         }
         
-        /* ===== FOOTER - ULTRA PREMIUM ===== */
+        /* ===== FOOTER ===== */
         .footer {
             background: var(--gradient-dark);
             color: var(--white);
@@ -434,8 +506,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 45, 143, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 45, 143, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(212, 86, 135, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 86, 135, 0.05) 0%, transparent 50%);
             pointer-events: none;
         }
         
@@ -461,7 +533,7 @@
         .footer-logo:hover {
             transform: scale(1.08) rotate(2deg);
             filter: 
-                drop-shadow(0 4px 8px rgba(255, 45, 143, 0.3))
+                drop-shadow(0 4px 8px rgba(212, 86, 135, 0.3))
                 brightness(1.2)
                 contrast(1.2);
         }
@@ -574,7 +646,7 @@
         .contact-card:hover {
             background: rgba(255, 255, 255, 0.08);
             transform: translateY(-4px);
-            border-color: rgba(255, 45, 143, 0.3);
+            border-color: rgba(212, 86, 135, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
@@ -679,7 +751,7 @@
         .hours-row:hover {
             background: rgba(255, 255, 255, 0.08);
             transform: translateX(4px);
-            border-color: rgba(255, 45, 143, 0.2);
+            border-color: rgba(212, 86, 135, 0.2);
         }
         
         .hours-day {
@@ -698,9 +770,9 @@
             font-weight: 600;
             position: relative;
             padding: 0.25rem 0.75rem;
-            background: rgba(255, 45, 143, 0.1);
+            background: rgba(212, 86, 135, 0.1);
             border-radius: 20px;
-            border: 1px solid rgba(255, 45, 143, 0.2);
+            border: 1px solid rgba(212, 86, 135, 0.2);
         }
         
         .copyright {
@@ -776,43 +848,7 @@
             box-shadow: var(--shadow-pink-heavy);
         }
         
-        /* ===== DECORATIVE ELEMENTS ===== */
-        .accent-line {
-            width: 80px;
-            height: 4px;
-            background: var(--gradient-pink);
-            margin: var(--space-md) 0;
-            border-radius: 2px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .accent-line::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 20px;
-            height: 100%;
-            background: var(--white);
-            animation: shimmer 2s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(500%); }
-        }
-        
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            background: var(--gradient-pink);
-            opacity: 0.1;
-            filter: blur(40px);
-            z-index: -1;
-        }
-        
-        /* ===== RESPONSIVE DESIGN - PERFECT FOR ALL DEVICES ===== */
+        /* ===== RESPONSIVE DESIGN ===== */
         @media (min-width: 1400px) {
             .container {
                 max-width: 1400px;
@@ -839,86 +875,10 @@
             }
         }
         
-        @media (max-width: 991.98px) {
-            .navbar-collapse {
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(20px);
-                padding: var(--space-md);
-                margin-top: var(--space-sm);
-                border-radius: var(--radius-lg);
-                box-shadow: var(--shadow-hard);
-                border: 1px solid rgba(255, 45, 143, 0.1);
-            }
-            
-            .navbar-nav {
-                gap: 0.5rem;
-                padding: var(--space-sm) 0;
-            }
-            
-            .nav-item {
-                width: 100%;
-            }
-            
-            .nav-link {
-                width: 100%;
-                text-align: center;
-                padding: 1rem 1.5rem !important;
-                border-radius: var(--radius-md);
-                justify-content: center;
-            }
-            
-            .nav-link::after {
-                display: none;
-            }
-            
-            .btn-book {
-                width: 100%;
-                margin-top: var(--space-sm);
-                justify-content: center;
-            }
-            
-            .footer {
-                padding: var(--space-xl) 0 var(--space-lg);
-            }
-            
-            .footer .col-lg-3,
-            .footer .col-md-6 {
-                margin-bottom: var(--space-xl);
-            }
-            
-            .footer-heading {
-                font-size: 1rem;
-            }
-            
-            .footer-logo {
-                height: 55px;
-            }
-        }
-        
         @media (max-width: 767.98px) {
             :root {
                 --space-xl: 3rem;
                 --space-xxl: 4rem;
-            }
-            
-            main {
-                padding-top: 90px;
-            }
-            
-            .navbar {
-                padding: 1rem 0;
-            }
-            
-            .nav-logo {
-                height: 48px;
-            }
-            
-            .display-1 {
-                font-size: clamp(2.75rem, 4vw, 4rem);
-            }
-            
-            .display-2 {
-                font-size: clamp(2.25rem, 3.5vw, 3rem);
             }
             
             .btn {
@@ -961,14 +921,6 @@
                 padding: var(--space-lg) 0;
             }
             
-            h1 {
-                font-size: 2.25rem;
-            }
-            
-            h2 {
-                font-size: 1.875rem;
-            }
-            
             .btn {
                 width: 100%;
                 max-width: 320px;
@@ -989,25 +941,6 @@
             }
         }
         
-        /* ===== ANIMATIONS ===== */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-        
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        
         /* ===== CUSTOM SCROLLBAR ===== */
         ::-webkit-scrollbar {
             width: 10px;
@@ -1025,6 +958,44 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--deep-pink);
         }
+        
+        /* ===== ADDITIONAL CLASSES FOR CONSISTENCY ===== */
+        .text-pink {
+            color: var(--primary-pink) !important;
+        }
+        
+        .bg-pink {
+            background-color: var(--primary-pink) !important;
+        }
+        
+        .bg-pink-soft {
+            background-color: var(--light-pink) !important;
+        }
+        
+        .btn-pink {
+            background-color: var(--primary-pink) !important;
+            border-color: var(--primary-pink) !important;
+            color: white !important;
+        }
+        
+        .btn-pink:hover {
+            background-color: var(--deep-pink) !important;
+            border-color: var(--deep-pink) !important;
+        }
+        
+        .btn-outline-pink {
+            border-color: var(--primary-pink) !important;
+            color: var(--primary-pink) !important;
+        }
+        
+        .btn-outline-pink:hover {
+            background-color: var(--primary-pink) !important;
+            color: white !important;
+        }
+        
+        .border-pink-light {
+            border-color: rgba(212, 86, 135, 0.1) !important;
+        }
     </style>
 </head>
 <body>
@@ -1040,7 +1011,7 @@
                 <img src="{{ asset('images/watermarks/salon/logo2.png') }}" 
                      alt="Braids by Kholeka - Luxury Hair Artistry" 
                      class="nav-logo"
-                     onerror="this.onerror=null; this.src='https://via.placeholder.com/200x50/FF2D8F/FFFFFF?text=Braids+by+Kholeka'">
+                     onerror="this.onerror=null; this.src='https://via.placeholder.com/200x50/d45687/FFFFFF?text=Braids+by+Kholeka'">
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
@@ -1074,10 +1045,19 @@
                     </li>
                 </ul>
                 
-                <div class="d-lg-none w-100 text-center mt-3">
-                    <a href="{{ route('contact') }}" class="btn btn-primary ms-lg-3 d-inline-block">
+                <!-- Button centered below nav links on mobile -->
+                <div class="d-lg-none w-100 text-center mt-3 pt-3 border-top border-pink-light">
+                    <a href="{{ route('contact') }}" class="btn btn-primary">
                         <i class="bi bi-calendar-check me-2"></i>
                         <span>Book Appointment</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop button -->
+                <div class="d-none d-lg-block ms-lg-3">
+                    <a href="{{ route('contact') }}" class="btn btn-primary">
+                        <i class="bi bi-calendar-check me-2"></i>
+                        <span>Book Now</span>
                     </a>
                 </div>
             </div>
@@ -1098,7 +1078,7 @@
                         <img src="{{ asset('images/watermarks/salon/logo2.png') }}" 
                              alt="Braids by Kholeka - Luxury Hair Artistry" 
                              class="footer-logo"
-                             onerror="this.onerror=null; this.src='https://via.placeholder.com/200x50/FF2D8F/FFFFFF?text=Braids+by+Kholeka'">
+                             onerror="this.onerror=null; this.src='https://via.placeholder.com/200x50/d45687/FFFFFF?text=Braids+by+Kholeka'">
                     </a>
                     <p class="mb-4" style="color: rgba(255, 255, 255, 0.85); font-size: 1rem; line-height: 1.7;">
                         Where hair becomes art. Professional braiding services with meticulous attention to detail 
@@ -1199,7 +1179,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 text-center text-lg-start mb-3 mb-lg-0">
                         <p class="mb-0">&copy; <span id="currentYear">{{ date('Y') }}</span> 
-                            <a href="{{ route('home') }}" class="text-gradient">Braids by Kholeka</a>. 
+                            <a href="{{ route('home') }}" class="text-pink">Braids by Kholeka</a>. 
                             All rights reserved. <a href="/privacy" style="color: rgba(255, 255, 255, 0.7);">Privacy Policy</a>
                         </p>
                     </div>
@@ -1242,16 +1222,13 @@
             function updateScrollEffects() {
                 const scrollY = window.scrollY;
                 
-                if (scrollY > 80) {
+                if (scrollY > 50) {
                     navbar.classList.add('scrolled');
                     scrollTopBtn.classList.add('active');
                 } else {
                     navbar.classList.remove('scrolled');
                     scrollTopBtn.classList.remove('active');
                 }
-                
-                // Parallax effect for navbar
-                navbar.style.transform = `translateY(${scrollY * 0.02}px)`;
             }
             
             window.addEventListener('scroll', updateScrollEffects);
@@ -1376,55 +1353,7 @@
                 });
             });
             
-            // 9. Form Input Focus Effects (if forms exist)
-            const forms = document.querySelectorAll('form');
-            forms.forEach(form => {
-                const inputs = form.querySelectorAll('input, textarea, select');
-                
-                inputs.forEach(input => {
-                    input.addEventListener('focus', () => {
-                        input.parentElement.style.transform = 'translateY(-3px)';
-                        input.parentElement.style.boxShadow = 'var(--shadow-pink)';
-                    });
-                    
-                    input.addEventListener('blur', () => {
-                        input.parentElement.style.transform = 'translateY(0)';
-                        input.parentElement.style.boxShadow = 'var(--shadow-soft)';
-                    });
-                });
-            });
-            
-            // 10. Lazy Load Images with fade-in effect
-            const images = document.querySelectorAll('img');
-            images.forEach(img => {
-                if (img.complete) {
-                    img.classList.add('fade-in');
-                } else {
-                    img.addEventListener('load', () => {
-                        img.classList.add('fade-in');
-                    });
-                }
-            });
-            
-            // 11. Add floating shapes for visual interest
-            function createFloatingShapes() {
-                const footer = document.querySelector('.footer');
-                for (let i = 0; i < 3; i++) {
-                    const shape = document.createElement('div');
-                    shape.className = 'floating-shape';
-                    shape.style.width = `${Math.random() * 200 + 100}px`;
-                    shape.style.height = shape.style.width;
-                    shape.style.left = `${Math.random() * 100}%`;
-                    shape.style.top = `${Math.random() * 100}%`;
-                    shape.style.animationDelay = `${Math.random() * 5}s`;
-                    shape.style.animationDuration = `${Math.random() * 10 + 10}s`;
-                    footer.appendChild(shape);
-                }
-            }
-            
-            createFloatingShapes();
-            
-            // 12. Smooth scroll for anchor links
+            // 9. Smooth scroll for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
@@ -1442,9 +1371,31 @@
                             top: offsetPosition,
                             behavior: 'smooth'
                         });
+                        
+                        // Close mobile menu if open
+                        if (window.innerWidth < 992) {
+                            const navbarCollapse = document.querySelector('.navbar-collapse');
+                            const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                            if (bsCollapse) {
+                                bsCollapse.hide();
+                            }
+                        }
                     }
                 });
             });
+            
+            // 10. Update navbar height dynamically for proper scroll padding
+            function updateNavbarHeight() {
+                const navbar = document.querySelector('.navbar');
+                if (navbar) {
+                    const height = navbar.offsetHeight;
+                    document.documentElement.style.setProperty('--navbar-height', height + 'px');
+                    document.documentElement.style.setProperty('scroll-padding-top', `calc(${height}px + 20px)`);
+                }
+            }
+            
+            updateNavbarHeight();
+            window.addEventListener('resize', updateNavbarHeight);
             
         });
         
@@ -1458,10 +1409,12 @@
                 }
             }
             
-            @keyframes pulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.05); }
-                100% { transform: scale(1); }
+            .text-gradient {
+                background: var(--gradient-pink);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                display: inline-block;
             }
         `;
         document.head.appendChild(style);
