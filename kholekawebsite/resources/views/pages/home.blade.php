@@ -111,7 +111,7 @@
                                     <video autoplay muted loop playsinline 
                                            class="hero-video"
                                            poster="{{ asset('images/homepg/video/poster.jpg') }}">
-                                        <source src="{{ asset('images/homepg/video/BraidsByKholekaVideo.mp4') }}" type="video/mp4">
+                                        <source src="{{ asset('images/homepg/video/BraidsByKholekaVideo2.mp4') }}" type="video/mp4">
                                     </video>
                                     
                                     <!-- Play button overlay -->

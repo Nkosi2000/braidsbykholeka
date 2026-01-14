@@ -1008,7 +1008,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="{{ asset('images/watermarks/salon/logo2.png') }}" 
+                <img src="{{ asset('images/watermarks/salon/favicon.ico') }}" 
                      alt="Braids by Kholeka - Luxury Hair Artistry" 
                      class="nav-logo"
                      onerror="this.onerror=null; this.src='https://via.placeholder.com/200x50/d45687/FFFFFF?text=Braids+by+Kholeka'">
@@ -1032,7 +1032,7 @@
                            href="{{ route('services.index') }}">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('portfolio.*') ? 'active' : '' }}" 
+                        <a class="nav-link {{ request()->routeIs('portfolio') ? 'active' : '' }}" 
                            href="{{ route('portfolio') }}">Portfolio</a>
                     </li>
                     <li class="nav-item">
@@ -1075,7 +1075,7 @@
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
                     <a href="{{ route('home') }}" class="footer-brand">
-                        <img src="{{ asset('images/watermarks/salon/logo2.png') }}" 
+                        <img src="{{ asset('images/watermarks/salon/favicon.ico') }}" 
                              alt="Braids by Kholeka - Luxury Hair Artistry" 
                              class="footer-logo"
                              onerror="this.onerror=null; this.src='https://via.placeholder.com/200x50/d45687/FFFFFF?text=Braids+by+Kholeka'">
@@ -1109,7 +1109,7 @@
                         <li><a href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('services.index') }}">Services</a></li>
                         <li><a href="{{ route('portfolio') }}">Portfolio</a></li>
-                        <li><a href="{{ route('about') }}">About Me</a></li>
+                        <li><a href="{{ route('about') }}">About</a></li>
                         <li><a href="{{ route('contact') }}">Contact</a></li>
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
@@ -1133,7 +1133,7 @@
                             </div>
                             <div class="contact-details">
                                 <strong>Phone Number</strong>
-                                <a href="tel:+1234567890">+1 (234) 567-890</a>
+                                <a href="tel:+1234567890">+27 71 937 5880</a>
                             </div>
                         </div>
                         <div class="contact-card">
@@ -1142,7 +1142,7 @@
                             </div>
                             <div class="contact-details">
                                 <strong>Email Address</strong>
-                                <a href="mailto:info@braidsbykholeka.com">artistry@braidsbykholeka.com</a>
+                                <a href="mailto:info@braidsbykholeka.com">admin@braidsbykholeka.com</a>
                             </div>
                         </div>
                     </div>
