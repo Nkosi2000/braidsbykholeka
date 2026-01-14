@@ -110,8 +110,9 @@
                                 <div class="video-inner">
                                     <video autoplay muted loop playsinline 
                                            class="hero-video"
-                                           poster="{{ asset('images/homepg/video/poster.jpg') }}">
-                                        <source src="{{ asset('images/homepg/video/BraidsByKholekaVideo2.mp4') }}" type="video/mp4">
+                                           >
+                                        <source src="https://res.cloudinary.com/dbeippbn2/video/upload/q_auto,f_auto/BraidsByKholekaVideo2_zn2dwy.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
                                     </video>
                                     
                                     <!-- Play button overlay -->
