@@ -1008,7 +1008,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="{{ asset('images/watermarks/salon/logo2.png') }}" 
+                <img src="{{ asset('images/watermarks/salon/logo3.webp') }}" 
                      alt="Braids by Kholeka - Luxury Hair Artistry" 
                      class="nav-logo"
                      onerror="this.onerror=null; this.src='https://via.placeholder.com/200x50/d45687/FFFFFF?text=Braids+by+Kholeka'">
