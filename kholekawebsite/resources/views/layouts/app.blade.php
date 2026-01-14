@@ -1075,7 +1075,7 @@
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
                     <a href="{{ route('home') }}" class="footer-brand">
-                        <img src="{{ asset('images/watermarks/salon/favicon.ico') }}" 
+                        <img src="{{ asset('images/watermarks/salon/logo3.webp') }}" 
                              alt="Braids by Kholeka - Luxury Hair Artistry" 
                              class="footer-logo"
                              onerror="this.onerror=null; this.src='https://via.placeholder.com/200x50/d45687/FFFFFF?text=Braids+by+Kholeka'">
